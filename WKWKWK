@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sistem Terkunci</title>
+    <style>
+        body { background-color: #000; color: white; font-family: sans-serif; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; overflow: hidden; user-select: none; }
+        .pin-display { font-size: 35px; margin-bottom: 40px; letter-spacing: 15px; height: 40px; color: #fff; }
+        .grid { display: grid; grid-template-columns: repeat(3, 85px); gap: 25px; }
+        .btn { width: 85px; height: 85px; border-radius: 50%; border: 1px solid #444; display: flex; align-items: center; justify-content: center; font-size: 28px; cursor: pointer; background: #1a1a1a; transition: 0.1s; }
+        .btn:active { background: #555; transform: scale(0.9); }
+        h2 { font-weight: 300; margin-bottom: 20px; letter-spacing: 2px; }
+    </style>
+</head>
+<body onclick="mintaFull()">
+    <h2>SISTEM TERKUNCI</h2>
+    <div class="pin-display" id="display"></div>
+    <div class="grid">
+        <div class="btn" onclick="press(1)">1</div><div class="btn" onclick="press(2)">2</div><div class="btn" onclick="press(3)">3</div>
+        <div class="btn" onclick="press(4)">4</div><div class="btn" onclick="press(5)">5</div><div class="btn" onclick="press(6)">6</div>
+        <div class="btn" onclick="press(7)">7</div><div class="btn" onclick="press(8)">8</div><div class="btn" onclick="press(9)">9</div>
+        <div></div><div class="btn" onclick="press(0)">0</div>
+    </div>
+
+    <script>
+        let input = "";
+        
+        function mintaFull() {
+            let el = document.documentElement;
+            if (el.requestFullscreen) el.requestFullscreen();
+            else if (el.webkitRequestFullscreen) el.webkitRequestFullscreen();
+        }
+
+        function press(num) {
+            input += num;
+            document.getElementById('display').innerText = "•".repeat(input.length);
+            
+            if (input.length === 3) {
+                if (input === "123") {
+                    alert("AKSES DITERIMA ✅");
+                    document.body.innerHTML = "<h1 style='color:lime'>UNLOCKED 🔓</h1>";
+                } else {
+                    alert("PIN SALAH! ❌");
+                    input = "";
+                    document.getElementById('display').innerText = "";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
